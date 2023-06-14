@@ -27,8 +27,6 @@ public class Add_Contacts extends AppCompatActivity {
             public void onClick(View view) {
                 database.addContacts(binding.contactsName.getText().toString(),binding.contactsNumber.getText().toString());
                 Intent intent = new Intent(Add_Contacts.this,MainActivity.class);
-                intent.putExtra("name",name);
-                intent.putExtra("number",number);
                 startActivity(intent);
             }
         });

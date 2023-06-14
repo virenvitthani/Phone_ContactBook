@@ -45,10 +45,10 @@ public class Database extends SQLiteOpenHelper {
 //        db.execSQL(query);
 //    }
 //
-//    public Cursor displaycontacts() {
-//        String query="select * from context";
-//        SQLiteDatabase db=getReadableDatabase();
-//        Cursor cursor= db.rawQuery(query,null);
-//        return cursor;
-//    }
+    public Cursor Displayeddata() {
+        String query="select * from context";
+        SQLiteDatabase db=getReadableDatabase();
+        Cursor cursor= db.rawQuery(query,null);
+        return cursor;
+    }
 }
