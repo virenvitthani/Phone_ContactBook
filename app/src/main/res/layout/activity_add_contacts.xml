@@ -10,10 +10,10 @@
         android:layout_height="wrap_content"
         app:startIconDrawable="@drawable/ic_baseline_contacts_24"
         android:layout_margin="15dp"
-        android:hint="Contact Name">
+        android:hint="Contacts Name">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/contact_name"
+            android:id="@+id/contacts_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="text"
@@ -26,10 +26,10 @@
         android:layout_height="wrap_content"
         app:startIconDrawable="@drawable/ic_baseline_local_phone_24"
         android:layout_margin="15dp"
-        android:hint="Contact Number">
+        android:hint="Contacts Number">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/contact_number"
+            android:id="@+id/contacts_number"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="number"

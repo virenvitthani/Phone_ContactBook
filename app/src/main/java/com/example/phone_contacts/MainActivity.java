@@ -3,10 +3,9 @@ package com.example.phone_contacts;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ImageView;
 import com.example.phone_contacts.databinding.ActivityMainBinding;
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -17,10 +16,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        binding.addcontact.setOnClickListener(new View.OnClickListener() {
+
+        ArrayList <String> name = getIntent().getStringArrayListExtra("name");
+        ArrayList <String> number = getIntent().getStringArrayListExtra("number");
+        binding.addcontacts.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this,Add_Contact.class);
+                Intent intent = new Intent(MainActivity.this, Add_Contacts.class);
                 startActivity(intent);
             }
         });
