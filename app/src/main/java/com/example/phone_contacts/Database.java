@@ -45,8 +45,8 @@ public class Database extends SQLiteOpenHelper {
 //        db.execSQL(query);
 //    }
 //
-    public Cursor Displayeddata() {
-        String query="select * from context";
+    public Cursor Displayed() {
+        String query="select * from Contact";
         SQLiteDatabase db=getReadableDatabase();
         Cursor cursor= db.rawQuery(query,null);
         return cursor;
