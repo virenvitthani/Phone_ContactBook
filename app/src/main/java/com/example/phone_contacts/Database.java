@@ -33,17 +33,17 @@ public class Database extends SQLiteOpenHelper {
         Log.d("TTT", "addContacts: number = "+number);
     }
 
-//    public void deletecontacts(int id) {
-//        String query="delete from context where Id="+id+"";
-//        SQLiteDatabase db=getWritableDatabase();
-//        db.execSQL(query);
-//    }
-//
-//    public void updatecontacts(int id, String name, String number) {
-//        String query="update Context set NAME='"+name+"',NUMBER='"+number+"',where ID="+id+"";
-//        SQLiteDatabase db=getWritableDatabase();
-//        db.execSQL(query);
-//    }
+    public void deletecontacts(int id) {
+        String query="delete from contact where Id="+id+"";
+        SQLiteDatabase db=getWritableDatabase();
+        db.execSQL(query);
+    }
+
+    public void updatecontacts(int id, String name, String number) {
+        String query="update Contact set NAME='"+name+"',NUMBER='"+number+"',where ID="+id+"";
+        SQLiteDatabase db=getWritableDatabase();
+        db.execSQL(query);
+    }
 //
     public Cursor Displayed() {
         String query="select * from Contact";

@@ -18,8 +18,7 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     ActivityMainBinding binding;
     Recyclerview_Adapter adapter;
-    ArrayList <String> namelist = new ArrayList<>();
-    ArrayList <String> numberlist = new ArrayList<>();
+    ArrayList <Contact_Model> contactlist = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,10 +41,14 @@ public class MainActivity extends AppCompatActivity {
         database = new Database(MainActivity.this);
         Cursor cursor = database.Displayed();
         while (cursor.moveToNext()) {
-            namelist.add(cursor.getString(1));
-            numberlist.add(cursor.getString(2));
+
+            int id = cursor.getInt(0);
+            String name = cursor.getString(1);
+            String number = cursor.getString(2);
+            Contact_Model contactModel = new Contact_Model(id,name,number);
+            contactlist.add(contactModel);
         }
-        adapter = new Recyclerview_Adapter(MainActivity.this,namelist,numberlist);
+        adapter = new Recyclerview_Adapter(MainActivity.this,contactlist);
         LinearLayoutManager manager = new LinearLayoutManager(getApplicationContext());
         manager.setOrientation(RecyclerView.VERTICAL);
         recyclerView.setLayoutManager(manager);
