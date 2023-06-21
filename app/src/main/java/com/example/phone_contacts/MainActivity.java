@@ -46,7 +46,8 @@ public class MainActivity extends AppCompatActivity {
             int id = cursor.getInt(0);
             String name = cursor.getString(1);
             String number = cursor.getString(2);
-            Contact_Model contactModel = new Contact_Model(id,name,number);
+            String imagepath = cursor.getString(3);
+            Contact_Model contactModel = new Contact_Model(id,name,number,imagepath);
             contactlist.add(contactModel);
         }
         adapter = new Recyclerview_Adapter(MainActivity.this,contactlist);

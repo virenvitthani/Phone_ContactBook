@@ -10,13 +10,13 @@ import androidx.annotation.Nullable;
 public class Database extends SQLiteOpenHelper {
 
     public Database(@Nullable Context context) {
-        super(context,"contactsBook",null,1);
+        super(context,"contacts",null,1);
         Log.d("TTT", "Database: Database Create");;
     }
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        String query= "create table Contact(Id integer primary key autoincrement,Name text,NUMBER text)";
+        String query= "create table Contact(Id integer primary key autoincrement,Name text,NUMBER text,IMAGEPATH text)";
         sqLiteDatabase.execSQL(query);
         Log.d("TTT", "onCreate: Table Create");
     }
@@ -25,8 +25,8 @@ public class Database extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
     }
 
-    public void addContacts(String name, String number) {
-        String query="insert into Contact (NAME,NUMBER) values('"+name+"','"+number+"')";
+    public void addContacts(String name, String number, String imagepath) {
+        String query="insert into Contact (NAME,NUMBER,IMAGEPATH) values('"+name+"','"+number+"','"+imagepath+"')";
         SQLiteDatabase db=getWritableDatabase();
         db.execSQL(query);
         Log.d("TTT", "addContacts: name = "+name);

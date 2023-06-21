@@ -5,11 +5,13 @@ public class Contact_Model {
     int id;
     String name;
     String number;
+    String imagepath;
 
-    public Contact_Model(int id, String name, String number) {
+    public Contact_Model(int id, String name, String number, String imagepath) {
         this.id = id;
         this.name = name;
         this.number = number;
+        this.imagepath = imagepath;
     }
 
     public int getId() {
@@ -34,5 +36,13 @@ public class Contact_Model {
 
     public void setNumber(String number) {
         this.number = number;
+    }
+
+    public String getImagepath() {
+        return imagepath;
+    }
+
+    public void setImagepath(String imagepath) {
+        this.imagepath = imagepath;
     }
 }

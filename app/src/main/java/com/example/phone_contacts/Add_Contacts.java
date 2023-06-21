@@ -55,7 +55,7 @@ public class Add_Contacts extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //                ahiya lakhavu
-                database.addContacts(binding.contactsName.getText().toString(),binding.contactsNumber.getText().toString());
+                database.addContacts(binding.contactsName.getText().toString(),binding.contactsNumber.getText().toString(),imagepath);
                 Intent intent = new Intent(Add_Contacts.this,MainActivity.class);
                 startActivity(intent);
             }
