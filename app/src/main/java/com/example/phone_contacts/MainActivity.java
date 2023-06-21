@@ -3,13 +3,12 @@ package com.example.phone_contacts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
-
 import com.example.phone_contacts.databinding.ActivityMainBinding;
-
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
@@ -17,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
     Database database;
     RecyclerView recyclerView;
     ActivityMainBinding binding;
+    SwipeRefreshLayout swipeRefreshLayout;
     Recyclerview_Adapter adapter;
     ArrayList <Contact_Model> contactlist = new ArrayList<>();
 
@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, Add_Contacts.class);
+                intent.putExtra("button","add");
                 startActivity(intent);
             }
         });
@@ -53,5 +54,13 @@ public class MainActivity extends AppCompatActivity {
         manager.setOrientation(RecyclerView.VERTICAL);
         recyclerView.setLayoutManager(manager);
         recyclerView.setAdapter(adapter);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                swipeRefreshLayout.setRefreshing(true);
+                recyclerView.setAdapter(adapter);
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
     }
 }

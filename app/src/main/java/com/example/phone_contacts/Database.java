@@ -40,11 +40,11 @@ public class Database extends SQLiteOpenHelper {
     }
 
     public void updatecontacts(int id, String name, String number) {
-        String query="update Contact set NAME='"+name+"',NUMBER='"+number+"',where ID="+id+"";
+        String query="update Contact set NAME='"+name+"',NUMBER='"+number+"' where Id="+id+"";
         SQLiteDatabase db=getWritableDatabase();
         db.execSQL(query);
     }
-//
+
     public Cursor Displayed() {
         String query="select * from Contact";
         SQLiteDatabase db=getReadableDatabase();

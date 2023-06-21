@@ -1,8 +1,9 @@
 package com.example.phone_contacts;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,18 +19,18 @@ import java.util.ArrayList;
 
 public class Recyclerview_Adapter extends RecyclerView.Adapter<Recyclerview_Adapter.RecyclerviewHolder> {
 
-    MainActivity mainActivity;
+    Context context;
     ArrayList<Contact_Model> contactlist;
 
     public Recyclerview_Adapter(MainActivity mainActivity, ArrayList<Contact_Model> contactlist) {
-        this.mainActivity = mainActivity;
+        this.context = mainActivity;
         this.contactlist = contactlist;
     }
 
     @NonNull
     @Override
     public Recyclerview_Adapter.RecyclerviewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(mainActivity).inflate(R.layout.contact_list_item,parent,false);
+        View view = LayoutInflater.from(context).inflate(R.layout.contact_list_item,parent,false);
         RecyclerviewHolder holder = new RecyclerviewHolder(view);
         return holder;
     }
@@ -41,19 +42,25 @@ public class Recyclerview_Adapter extends RecyclerView.Adapter<Recyclerview_Adap
         holder.more_vert.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                PopupMenu popupMenu = new PopupMenu(mainActivity,holder.more_vert);
-                mainActivity.getMenuInflater().inflate(R.menu.menu,popupMenu.getMenu());
+                PopupMenu popupMenu = new PopupMenu(context,holder.more_vert);
+                popupMenu.getMenuInflater().inflate(R.menu.menu,popupMenu.getMenu());
                 popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override
                     public boolean onMenuItemClick(MenuItem menuItem) {
-                        Database database = new Database(mainActivity);
+                        Database database = new Database(context);
                         if(menuItem.getItemId()==R.id.update)
                         {
-                            Toast.makeText(mainActivity, "item updated", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(context,Add_Contacts.class);
+                            intent.putExtra("id",contactlist.get(position).getId());
+                            intent.putExtra("name",contactlist.get(position).getName());
+                            intent.putExtra("number",contactlist.get(position).getNumber());
+                            intent.putExtra("button","update");
+                            context.startActivity(intent);
+                            Toast.makeText(context, "item updated", Toast.LENGTH_SHORT).show();
                         }
                         if(menuItem.getItemId()==R.id.delete)
                         {
-                            Toast.makeText(mainActivity, "item deleted", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, "item deleted", Toast.LENGTH_SHORT).show();
                             database.deletecontacts(contactlist.get(position).getId());
                             contactlist.remove(position);
                             notifyDataSetChanged();
