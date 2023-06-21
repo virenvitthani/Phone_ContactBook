@@ -54,13 +54,5 @@ public class MainActivity extends AppCompatActivity {
         manager.setOrientation(RecyclerView.VERTICAL);
         recyclerView.setLayoutManager(manager);
         recyclerView.setAdapter(adapter);
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                swipeRefreshLayout.setRefreshing(true);
-                recyclerView.setAdapter(adapter);
-                swipeRefreshLayout.setRefreshing(false);
-            }
-        });
     }
 }

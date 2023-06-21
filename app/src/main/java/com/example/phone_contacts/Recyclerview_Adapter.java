@@ -39,6 +39,7 @@ public class Recyclerview_Adapter extends RecyclerView.Adapter<Recyclerview_Adap
     public void onBindViewHolder(@NonNull Recyclerview_Adapter.RecyclerviewHolder holder, @SuppressLint("RecyclerView") int position) {
         holder.txt1.setText(""+contactlist.get(position).getName());
         holder.txt2.setText(""+contactlist.get(position).getNumber());
+//        load image set kari
         holder.more_vert.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -88,4 +89,6 @@ public class Recyclerview_Adapter extends RecyclerView.Adapter<Recyclerview_Adap
             more_vert = itemView.findViewById(R.id.more_vert);
         }
     }
+
+//    load image levi google
 }
