@@ -3,7 +3,6 @@ package com.example.phone_contacts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -16,7 +15,6 @@ public class MainActivity extends AppCompatActivity {
     Database database;
     RecyclerView recyclerView;
     ActivityMainBinding binding;
-    SwipeRefreshLayout swipeRefreshLayout;
     Recyclerview_Adapter adapter;
     ArrayList <Contact_Model> contactlist = new ArrayList<>();
 

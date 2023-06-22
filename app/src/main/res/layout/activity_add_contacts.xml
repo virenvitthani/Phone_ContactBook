@@ -6,12 +6,21 @@
     android:orientation="vertical">
 
     <ImageView
-        android:id="@+id/addcontacts_img"
+        android:id="@+id/addcontactsImg"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_gravity="center"
         android:layout_marginTop="10dp"
+        android:layout_gravity="center"
         android:src="@drawable/ic_launcher_background"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Take Photo"
+        android:textSize="30sp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:gravity="center"/>
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
@@ -58,12 +67,12 @@
 
     <Button
         android:id="@+id/update"
-        android:layout_width="100dp"
-        android:layout_height="55dp"
+        android:layout_width="150dp"
+        android:layout_height="60dp"
         android:layout_gravity="center"
         android:text="UPDATE"
         android:textStyle="bold"
-        android:textSize="14sp"
+        android:textSize="23sp"
         android:textColor="@color/black"
         android:backgroundTint="@color/teal_700"
         android:visibility="gone"/>

@@ -3,11 +3,14 @@ package com.example.phone_contacts;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -15,6 +18,9 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 public class Recyclerview_Adapter extends RecyclerView.Adapter<Recyclerview_Adapter.RecyclerviewHolder> {
@@ -39,7 +45,7 @@ public class Recyclerview_Adapter extends RecyclerView.Adapter<Recyclerview_Adap
     public void onBindViewHolder(@NonNull Recyclerview_Adapter.RecyclerviewHolder holder, @SuppressLint("RecyclerView") int position) {
         holder.txt1.setText(""+contactlist.get(position).getName());
         holder.txt2.setText(""+contactlist.get(position).getNumber());
-//        load image set kari
+        loadImageFromStorage(contactlist.get(position).getImagepath(),holder.imageView);
         holder.more_vert.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -82,13 +88,28 @@ public class Recyclerview_Adapter extends RecyclerView.Adapter<Recyclerview_Adap
     public class RecyclerviewHolder extends RecyclerView.ViewHolder {
         TextView txt1,txt2;
         ImageButton more_vert;
+        ImageView imageView;
         public RecyclerviewHolder(@NonNull View itemView) {
             super(itemView);
             txt1 = itemView.findViewById(R.id.contact_item_name);
             txt2 = itemView.findViewById(R.id.contact_item_number);
             more_vert = itemView.findViewById(R.id.more_vert);
+            imageView = itemView.findViewById(R.id.contact_list_img);
         }
     }
 
-//    load image levi google
+    private void loadImageFromStorage(String path,ImageView imageView)
+    {
+
+        try {
+            File f=new File(path);
+            Bitmap b = BitmapFactory.decodeStream(new FileInputStream(f));
+            imageView.setImageBitmap(b);
+        }
+        catch (FileNotFoundException e)
+        {
+            e.printStackTrace();
+        }
+
+    }
 }

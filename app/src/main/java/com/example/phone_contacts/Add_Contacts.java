@@ -7,13 +7,18 @@ import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
 import com.example.phone_contacts.databinding.ActivityAddContactsBinding;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -22,7 +27,7 @@ public class Add_Contacts extends AppCompatActivity {
 
     ActivityAddContactsBinding binding;
     Database database;
-    String imagename,imagepath;
+    String imageview,imagepath;
     private static final int CAMERA_REQUEST = 100;
 
     @Override
@@ -46,7 +51,7 @@ public class Add_Contacts extends AppCompatActivity {
         binding.addcontactsImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+                Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 startActivityForResult(cameraIntent, CAMERA_REQUEST);
             }
         });
@@ -54,7 +59,8 @@ public class Add_Contacts extends AppCompatActivity {
         binding.add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //                ahiya lakhavu
+                imagepath = imagepath+"/"+imagepath;
+                Log.d("TTT", "onClick: new imagepath"+imagepath);
                 database.addContacts(binding.contactsName.getText().toString(),binding.contactsNumber.getText().toString(),imagepath);
                 Intent intent = new Intent(Add_Contacts.this,MainActivity.class);
                 startActivity(intent);
@@ -80,9 +86,10 @@ public class Add_Contacts extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == CAMERA_REQUEST && resultCode == Activity.RESULT_OK) {
-            Bitmap photo = (Bitmap) data.getExtras().get("data");
-            binding.addcontactsImg.setImageBitmap(photo);
-            imagepath=saveToInternalStorage(photo);
+            Bitmap bitmap = (Bitmap) data.getExtras().get("data");
+            binding.addcontactsImg.setImageBitmap(bitmap);
+            imagepath=saveToInternalStorage(bitmap);
+            Log.d("TTT", "onActivityResult: path="+imagepath);
         }
     }
 
@@ -108,5 +115,19 @@ public class Add_Contacts extends AppCompatActivity {
             }
         }
         return directory.getAbsolutePath();
+    }
+
+    private void loadImageFromStorage(String path,ImageView imageView)
+    {
+
+        try {
+            File f=new File(path);
+            Bitmap b = BitmapFactory.decodeStream(new FileInputStream(f));
+            imageView.setImageBitmap(b);
+        }
+        catch (FileNotFoundException e)
+        {
+            e.printStackTrace();
+        }
     }
 }
